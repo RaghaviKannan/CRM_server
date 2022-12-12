@@ -43,7 +43,7 @@ router.get('/reset-password', async (req, res) => {
     const user = await db.collection("users").findOne({ token: req.query.url });
     console.log(req.query.url)
     if (user.token == req.query.url) {
-      res.redirect(`http://localhost:3001/user/reset-password-page?id=${user._id}`)
+      res.redirect(`https://silly-profiterole-5d81bd.netlify.app/user/reset-password-page?id=${user._id}`)
     } await closeConnection()
   } catch (error) {
     console.log(error)
