@@ -6,6 +6,9 @@ var logger = require('morgan');
 var cors = require("cors");
 const dotenv = require("dotenv").config();
 
+const {connectDb} = require ('./config');
+connectDb()
+
 var dashboardRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 
@@ -25,10 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', dashboardRouter);
 app.use('/user', userRouter);
-
-// app.use(cors({
-//   origin:"http://localhost:3001/"
-// }))
 
 
 // catch 404 and forward to error handler
