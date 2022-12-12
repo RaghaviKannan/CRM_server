@@ -89,6 +89,7 @@ router.post('/forgotpassword', async function (req, res, next) {
 
 router.post('/reset-password-page', async (req, res) => {
     try {
+        console.log("hi")
         const userid = req.query.id;
         const db = await connectDb();
         const salt = await bcrypt.genSalt(10)
