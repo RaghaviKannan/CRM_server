@@ -66,7 +66,7 @@ router.post('/forgotpassword', async function (req, res, next) {
                 from: "d73330670@gmail.com",
                 to: user.email,
                 subject: "Reset your password",
-                html: `<p>Click <a href="https://mycrmserver.onrender.com/reset-password?url=${randomUrl}">here</a> to reset your password.</p>`
+                html: `<p>Click <a href="http://localhost:3000/reset-password?url=${randomUrl}">here</a> to reset your password.</p>`
             }
             console.log(mailOptions.html)
             await db.collection("users").updateOne({ _id: user._id }, { $set: { token: randomUrl } })
@@ -91,7 +91,7 @@ router.post('/reset-password-page', async (req, res) => {
     try {
         const userid = req.query.id;
         const db = await connectDb();
-        const salt = await bcrypt.genSalt(10)
+        const salt = await bcrypt.genSalt(10)   
         const hash = await bcrypt.hash(req.body.password, salt)
         req.body.password = hash
         await db.collection("users").updateOne({ _id: mongodb.ObjectId(userid) }, { $set: { password: req.body.password } })
