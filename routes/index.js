@@ -43,7 +43,7 @@ router.get('/reset-password', async (req, res) => {
     const user = await db.collection("users").findOne({ token: req.query.url });
     console.log(req.query.url)
     if (user.token == req.query.url) {
-      res.redirect(`https://silly-profiterole-5d81bd.netlify.app/user/reset-password-page?id=${user._id}`)
+      res.redirect(`https://mycrmserver.onrender.com/user/reset-password-page?id=${user._id}`)
     } await closeConnection()
   } catch (error) {
     console.log(error)
@@ -54,6 +54,7 @@ router.get('/reset-password', async (req, res) => {
 router.post('/create/service-request', authorize, async function (req, res, next) {
   try {
     const db = await connectDb();
+    console.log("hi")
     const servicerequest = await db.collection("servicerequests").insertOne(req.body);
     await closeConnection()
     res.json({ message: "Service request created", id: servicerequest.insertedId })
